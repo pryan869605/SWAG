@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+
+int Fibonacci(int n){
+    if(n<=2) return 1;
+
+    int num1=1;
+    int num2=1;
+    int num3;
+    for(int i=3;i<=n;i++){
+        num3=num1+num2;
+        num1=num2;
+        num2=num3;
+    }
+    
+    return num3;
+}
+
+int Fibonacci2(int n){
+    if(n<=1)return 1;
+    return Fibonacci2(n-1)+Fibonacci2(n-2);
+}
+
+
+
+int modulo(int n,int z,int m){// { n,z<=2^31-1 } ,n,z가 양의 정수;
+    if(z=1)return n%m;
+    int z1,z2;
+    if(z%2==0){
+        z1=z2=z/2;
+    }else{
+        z1=z/2;
+        z2=(z/2)+1;
+    }
+    return (modulo(n,z1,m)*modulo(n,z2,m))%m;
+}
+
+
+
+int GCD(int n,int m){
+    int a=n>m?n:m;
+    int b=n>m?m:n;
+    int r=b;
+
+    while(r!=0){
+        b=r;
+        r=a%b;
+
+    }
+    return b;
+}
+
+int GCD2(int n,int m){
+    if(m==0)return n;
+
+    return GCD2(m,n%m);
+}
+
+
+vector<int> isPrime(int n){
+    vector<bool>arr(n+1,true);
+    vector<int>result;
+
+    arr[0]=arr[1]=false;
+
+    for(int i=2;i<=n;i++) {
+        if(!arr[i]) continue;
+
+        
+        for(int j=2*i;j<=n; j+=i) {
+            arr[j]=false;
+        }
+    }
+
+    for(int i=2;i<=n;i++){
+        if(arr[i]) result.push_back(i);
+    }
+    return result;
+}
+
+
+
+
+
+
+int main(){
+
+    cout<< modulo(2,3,3);
+    return 0;
+
+}
